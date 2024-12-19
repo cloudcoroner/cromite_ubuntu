@@ -18,7 +18,8 @@ cromitelatest=$(wget --max-redirect=0 $cromiteurllatestredirect 2>&1 | awk '/Loc
 
 file_cromite_desktop()
 {
-echo $password | sudo -S cat <<EOF > "/usr/share/applications/cromite.desktop"
+echo $password | sudo -S touch "/usr/share/applications/cromite.desktop"
+echo $password | sudo -S tee -a "/usr/share/applications/cromite.desktop" >/dev/null <<EOF
 #!/bin/sh
 
 # Author:      cloud coroner, cloud coroner [dot] com
@@ -50,7 +51,8 @@ EOF
 
 file_start_cromite()
 {
-echo $password | sudo -S cat <<EOF > "/etc/apparmor.d/usr.bin.cromite.chrome"
+echo $password | sudo -S touch "/etc/apparmor.d/usr.bin.cromite.chrome"
+echo $password | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome" >/dev/null <<EOF
 abi <abi/4.0>,
 include <tunables/global>
 
@@ -115,9 +117,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 		echo $password | sudo -S rm -rf "/usr/share/applications/cromite.desktop"
             
             	#create cromite desktop file
-		echo $password | sudo -S touch "/usr/share/applications/cromite.desktop"
 		file_cromite_desktop
-            
             
 		#set desktop file permissions
 		echo $password | sudo -S chmod 644 /usr/share/applications/cromite.desktop
@@ -130,7 +130,6 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
             
         	if [ "$(lsb_release -s -r)" = "24.04" ]; then
         	
-			echo $password | sudo -S touch "/etc/apparmor.d/usr.bin.cromite.chrome"
 			file_start_cromite
 			
 			echo $password | sudo -S apparmor_parser -r /etc/apparmor.d/usr.bin.cromite.chrome
