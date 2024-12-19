@@ -1,6 +1,8 @@
 #!/bin/bash
 # setup_cromite.sh
 
+#export HISTIGNORE='*sudo -S*'
+
 if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
 	
