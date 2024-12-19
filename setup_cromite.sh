@@ -7,9 +7,10 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
 	
         #zentity comes with the default Ubuntu install, but if not, install it
-        if exist /usr/bin/zenity
-        if not apt install zenity
-        
+        if [ ! -f "/usr/bin/zenity" ]; then
+		sudo apt install zenity
+        fi
+	
         if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "This will install Cromite and set it as the default web browser!\nClick Yes to proceed with the installation  OR \nclick No to cancel."; then
         					
         	password=$(zenity --forms --title "Cromite Install Tool" --width 500 --height 100 --text "Enter root password to install Cromite." --add-password "Password:")
