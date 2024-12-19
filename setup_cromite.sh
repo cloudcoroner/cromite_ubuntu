@@ -20,7 +20,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 		cromitedownloadurl="https://github.com/uazo/cromite/releases/download/"
 		
 		#Cromite startup file location
-		cromitestartupurl="https://github.com/cloudcoroner/cromite_ubuntu/blob/main/start_cromite.sh"
+		cromitestartupurl="https://github.com/cloudcoroner/cromite_ubuntu/releases/download/start_cromite.sh"
 		
 		#follow redirect to get the latest release version
 		cromitelatest=$(wget --max-redirect=0 $cromiteurllatestredirect 2>&1 | awk '/Location: /,// { print }' | awk '{print $2}' | awk -F "/" '{print $NF}')
