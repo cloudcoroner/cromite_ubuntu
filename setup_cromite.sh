@@ -3,6 +3,59 @@
 
 export HISTIGNORE='*sudo -S*'
 
+#GitHub repo redirect for latest release
+cromiteurllatestredirect="https://github.com/uazo/cromite/releases/latest"
+
+#GitHub release download repo
+cromitedownloadurl="https://github.com/uazo/cromite/releases/download/"
+
+#follow redirect to get the latest release version
+cromitelatest=$(wget --max-redirect=0 $cromiteurllatestredirect 2>&1 | awk '/Location: /,// { print }' | awk '{print $2}' | awk -F "/" '{print $NF}')
+
+
+
+
+
+file_cromite_desktop()
+{
+echo $password | sudo -S cat <<EOF > "/usr/share/applications/cromite.desktop"
+#!/bin/sh
+
+# Author:      cloud coroner, cloud coroner [dot] com
+# Description: Cromite is a Chromium fork based on Bromite with built-in support for adblocking and an eye for privacy.
+# Executed by: user, on-demand
+# Resources:   /bin/sh, zenity, latest Cromite release from Uazo
+
+[Desktop Entry]
+Name=Cromite
+X-MultipleArgs=false
+Exec=/usr/bin/cromite/start_cromite.sh %u
+Terminal=false
+Type=Application
+Icon=/usr/share/icons/hicolor/48x48/apps/cromite.png
+Comment=Browse the World Wide Web
+Keywords=Internet;WWW;Browser;Web;Explorer
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;
+StartupNotify=true
+StartupWMClass=Chromium-browser
+EOF
+
+#end of file_cromite_desktop
+}
+
+
+
+
+
+file_start_cromite()
+{
+
+
+
+#end of file_start_cromite
+}
+
 if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
 	
@@ -13,18 +66,6 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	
         if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "This will install Cromite and set it as the default web browser!\nClick Yes to proceed with the installation  OR \nclick No to cancel."; then
         					
-  		#GitHub repo redirect for latest release
-		cromiteurllatestredirect="https://github.com/uazo/cromite/releases/latest"
-		
-		#GitHub release download repo
-		cromitedownloadurl="https://github.com/uazo/cromite/releases/download/"
-		
-		#Cromite startup file location
-		cromitestartupurl="https://github.com/cloudcoroner/cromite_ubuntu/releases/download/start_cromite.sh"
-		
-		#follow redirect to get the latest release version
-		cromitelatest=$(wget --max-redirect=0 $cromiteurllatestredirect 2>&1 | awk '/Location: /,// { print }' | awk '{print $2}' | awk -F "/" '{print $NF}')
-
   		#get root password for install
   		password=$(zenity --forms --title "Cromite Install Tool" --width 500 --height 100 --text "Enter root password to install Cromite." --add-password "Password:")
         			
@@ -60,26 +101,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
             
             	#create cromite desktop file
 		echo $password | sudo -S touch "/usr/share/applications/cromite.desktop"
-		echo $password | echo "#!/bin/sh" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo '' | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "# Author:      SAEOS, saeos [dot] com" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "# Description: Cromite is a Chromium fork based on Bromite with built-in support for adblocking and an eye for privacy." | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "# Executed by: user, on-demand" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "# Resources:   /bin/bash, default Ubuntu icon set" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "#" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "[Desktop Entry]" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Name=Cromite" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "X-MultipleArgs=false" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Exec=/usr/bin/cromite/start_cromite.sh %u" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Terminal=false" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Type=Application" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Icon=/usr/share/icons/hicolor/48x48/apps/cromite.png" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Comment=Browse the World Wide Web" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Keywords=Internet;WWW;Browser;Web;Explorer" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "Categories=GNOME;GTK;Network;WebBrowser;" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/https;x-scheme-handler/ftp;x-scheme-handler/chrome;video/webm;application/x-xpinstall;" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "StartupNotify=true" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
-		echo $password | echo "StartupWMClass=Chromium-browser" | sudo -S tee -a "/usr/share/applications/cromite.desktop"
+		file_cromite_desktop
             
             
 		#set desktop file permissions
