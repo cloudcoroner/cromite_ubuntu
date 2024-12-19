@@ -50,11 +50,26 @@ EOF
 
 file_start_cromite()
 {
+echo $password | sudo -S cat <<EOF > "/etc/apparmor.d/usr.bin.cromite.chrome"
+abi <abi/4.0>,
+include <tunables/global>
 
+profile cromite /usr/bin/cromite/chrome flags=(unconfined) {
+  userns,
 
+  include if exists <local/chrome>
+}
+EOF
 
 #end of file_start_cromite
 }
+
+
+
+
+
+
+
 
 if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
@@ -116,14 +131,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
         	if [ "$(lsb_release -s -r)" = "24.04" ]; then
         	
 			echo $password | sudo -S touch "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "abi <abi/4.0>," | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "include <tunables/global>" | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "" | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "profile cromite /usr/bin/cromite/chrome flags=(unconfined) {" | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "userns," | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "" | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "include if exists <local/chrome>" | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
-			echo $password | echo "}" | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome"
+			file_start_cromite
 			
 			echo $password | sudo -S apparmor_parser -r /etc/apparmor.d/usr.bin.cromite.chrome
             
