@@ -1,7 +1,7 @@
 #!/bin/bash
 #setup_cromite.sh
 
-#export HISTIGNORE='*sudo -S*'
+export HISTIGNORE='*sudo -S*'
 
 if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
@@ -20,7 +20,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 		cromitedownloadurl="https://github.com/uazo/cromite/releases/download/"
 		
 		#Cromite startup file location
-		cromitestartupurl="https://cloudcoroner.com/"
+		cromitestartupurl="https://github.com/cloudcoroner/cromite_ubuntu/blob/main/start_cromite.sh"
 		
 		#follow redirect to get the latest release version
 		cromitelatest=$(wget --max-redirect=0 $cromiteurllatestredirect 2>&1 | awk '/Location: /,// { print }' | awk '{print $2}' | awk -F "/" '{print $NF}')
@@ -47,7 +47,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 		
 		#download cromite startup file with update check and make executable
 		echo $password | sudo -S wget $cromitestartupurl -P /usr/bin/cromite/
-		echo $password | sudo -S chomd +x /usr/bin/cromite/start_cromite.sh
+		echo $password | sudo -S chmod +x /usr/bin/cromite/start_cromite.sh
 		
 		#clean up
 		echo $password | sudo -S rm -rf chrome-lin64.tar.gz
