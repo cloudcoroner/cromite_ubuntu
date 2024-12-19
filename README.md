@@ -6,15 +6,15 @@ Uazo has done amazing work with Cromite - A privacy focused chromium browser tha
 
 FAQs
 
-1. Why not other Linux distros? Well, Ubuntu is the most common distro of choice for average and first time Linux users. Installing a binary manually can be daunting for some users and I think it is important for users of all skillsets to have an option for a private browser.
+1. Why focus on Ubuntu? Ubuntu is the most common distro of choice for average and first time Linux users due to it's ease of use and compatability with the tools people use at work (including VPN clients). For many users, the steps required to manually install a binary can be daunting and I think it is important for users of all skillsets to have an accessible option for a private browser. This is my way of contributing.
 
-2. What does this script do? It checks that the user is running Ubuntu, downloads the binary package from Uazo's repo, and installs it into /usr/bin/cromite for all users. It also creates the necessary desktop icons, permissions and update mechanism.
+3. What does this script do? It checks that the user is running Ubuntu, downloads the binary package from Uazo's repo, and installs it into /usr/bin/cromite for all users. It also creates the necessary desktop icons, permissions and update mechanism.
 
-3. How does it update? When the script installs Cromite, it saves the version it downloads from Uazo's repo. Each time Cromite is started, the script checks Uazo's repo for an updated version. if one exists, the user will be prompted to install it. If the user never opens Cromite, the script never checks for an update. There is no running service. I wanted to give the user as much control and privacy as possible.
+4. How does it update? When the script installs Cromite, it saves the version it downloads from Uazo's repo. Each time Cromite is started, the script checks Uazo's repo for an updated version. if one exists, the user will be prompted to install it. If the user never opens Cromite, the script never checks for an update. There is no running service. I wanted to give the user as much control and privacy as possible.
 
-4. Why does it ask for a root password? For new Linux users, going into a command prompt can be scary. I know this is a bash script, but I figured putting a GUI on it and asking for a password once is more user friendly. You can lok through the script, the password is only kept during script execution.
+5. Why does it ask for a root password? For new Linux users, going into a command prompt can be scary. I know this is a bash script, but I figured putting a GUI on it and asking for a password once is more user friendly. You can lok through the script, the password is only kept during script execution.
 
-5. How do I install it?
+6. How do I install it?
      1. Download setup_cromite.sh in Ubuntu
      2. Go to your Downloads folder and right-click on the file setup_cromite.sh
      3. In the properties window, click on the permissions tab in the properties window and check the box "Allow executing file as a program"
