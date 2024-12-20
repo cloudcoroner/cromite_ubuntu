@@ -21,7 +21,8 @@ Setup Steps:
   9. You will be asked to confirm you want to Install (or uninstall) Cromite
   10.Next you will be asked for a root password (the same as a Windows admin password). This is used to make the appropriate changes to Ubuntu and is not stored anywhere.
 
-User Profile with Enhanced Privacy
+User Profile with Enhanced Privacy:
+  
   Cromite is secure and private out of the box. You have the option to install a user profile that includes the following changes:
   1. User history dicarded when Cromite is closed
   2. DNS over HTTPS configured to use Cloudflare DNS' Family security servers to filter malicious sites
