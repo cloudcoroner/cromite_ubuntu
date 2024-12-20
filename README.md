@@ -6,7 +6,7 @@ Uazo has done amazing work with Cromite - A privacy focused chromium browser tha
 
 Installation Video:
 
-  If you have 2 minutes, go to the wiki to watch a short install video that walks through uninstalling Cromite on Ubuntu Desktop 24.04.
+  If you have 2 minutes, go to the wiki to watch a short install video that walks through installing Cromite on Ubuntu Desktop 24.04.
   Link is here -> https://github.com/cloudcoroner/cromite_ubuntu/wiki/Video-Installing-Cromite-on-Ubuntu-24.04
 
 Setup Steps:
