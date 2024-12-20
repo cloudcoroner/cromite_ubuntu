@@ -337,7 +337,7 @@ fi
 
 install_cromite_profile()
 {
-if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "Would you like to configure Cromite with\nPRivate Search, additional Adblock and other settings?\n(Open the readme for more information)\nClick Yes to continue or No to keep default settings."; then
+if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "Would you like to configure Cromite with\nPrivate Search, additional Adblock and other settings?\n(Open the readme for more information)\n\nClick Yes to continue or No to keep default settings."; then
 
 	#unzip profile zip from release package into users profile
 	unzip cromite-home-config-chromium.zip -d ~/.config/
