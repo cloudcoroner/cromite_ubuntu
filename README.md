@@ -24,7 +24,7 @@ Setup Steps:
 User Profile with Enhanced Privacy:
   
   Cromite is secure and private out of the box. You have the option to install a user profile that includes the following changes:
-  1. User history dicarded when Cromite is closed
+  1. User history discarded when Cromite is closed
   2. DNS over HTTPS configured to use Cloudflare DNS' Family security servers to filter malicious sites
   3. Startpage.com set as default search engine. Startpage is based in the Netherlands. They proxy Google searches on your behalf and implment safe search. The add-on is not installed, Cromite is configured to use startpage.
   4. EFF.org Privacy Badger extension is pre-installed to block even more trackers. Go to https://privacybadger.org to learn more.
