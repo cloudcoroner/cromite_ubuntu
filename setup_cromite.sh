@@ -339,6 +339,9 @@ install_cromite_profile()
 {
 if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "Would you like to configure Cromite with\nPrivate Search, additional Adblock and other settings?\n(Open the readme for more information)\n\nClick Yes to continue or No to keep default settings."; then
 
+	#ensure user profile is clear to prevent conflicts
+	rm -rf ~/.config/chromium
+
 	#unzip profile zip from release package into users profile
 	unzip cromite-home-config-chromium.zip -d ~/.config/
 
@@ -364,7 +367,7 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
         if [ ! -f "/usr/bin/zenity" ]; then
 		sudo apt install zenity
         fi
-	setupchoice=$(zenity --forms --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool helps automate the install and uninstall of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
+	setupchoice=$(zenity --forms --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool helps automate the setup of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
 
   	if [ "$setupchoice" = "Install" ]; then
 		install_cromite
