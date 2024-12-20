@@ -5,12 +5,10 @@ A set of scripts to install and keep Cromite up to date on Ubuntu Linux Desktop
 Uazo has done amazing work with Cromite - A privacy focused chromium browser that was forked from Bromite. I wanted to create a script that makes it easy for the average user to add this to their Ubuntu desktop installations. Check out his amazing work, here: https://github.com/uazo/cromite
 
 Installation
-     1. Download
-          1. Download directly from the main project page on github by clicking on setup_cromite.sh and clicking Download Raw file on the right of the menu bar.
-          2. Download the latest release package from here https://github.com/cloudcoroner/cromite_ubuntu/releases. If you download the package, you will need to double click on the zip or tar.gz file to unpack it. It will probably create a folder to put the files in.
+     1. Download the latest release package from here https://github.com/cloudcoroner/cromite_ubuntu/releases.
      2. Go to your Downloads folder.
-          1. If you downloaded direclty from the main project, the file will be listed there.
-          2. If you download the package and unpacked it, double-click on the setup_cromite folder.
+          1. Double-click on the zip or tar.gz file to unpack it. It will extract the files in a new folder.
+          2. Double-click on the setup_cromite folder.
           2. Once you find the setup_cromite.sh file, right-click on the file and click Properties (at the bottom of the list)
      3. In Ubuntu 24.04
           1. In the properties window, turn on the toggle at the bottom named "Exectuable as a program" and then close the window by clicking the X in the top right corner
