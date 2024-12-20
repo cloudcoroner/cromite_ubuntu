@@ -305,9 +305,9 @@ if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 -
 		#end of Ubuntu 24.04 check for apparmor
 		fi
 
-		if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "Cromite has been Uninstalled.\n\nIf you would like to remove your app profile, click OK,\nor click Cancel to keep your Cromite settings for future installs."; then
+		if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "Cromite has been Uninstalled.\n\nIf you would like to remove your app profile, click Yes,\nor click No to keep your Cromite settings for future installs."; then
 
-			if zenity --warning --title "Cromite Uninstall Tool" --width 500 --height 100 --text "IF YOU HAVE OTHER VERSIONS OF THE CHROME OR CHROMIUM BRWOSER INSTALLED\nTHIS COULD REMOVE THOSE PROFILES AS WELL\n\n, click OK to continue or Cancel to keep your settings for future installs."; then
+			if zenity --question --windows-icon "warning" --title "Cromite Uninstall Tool" --width 500 --height 100 --text "IF YOU HAVE OTHER VERSIONS OF THE CHROME OR CHROMIUM BRWOSER INSTALLED\nTHIS COULD REMOVE THOSE PROFILES AS WELL\n\nClick Yes to continue or No to keep your settings for future installs."; then
 
 				rm -rf ~/home/.config/chromium
 				rm -rf ~/home/.gnome/apps/chrome-*
