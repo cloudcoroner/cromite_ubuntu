@@ -23,6 +23,7 @@ cromitelatest=$(wget --max-redirect=0 $cromiteurllatestredirect 2>&1 | awk '/Loc
 
 create_file_cromite_desktop()
 {
+echo $password | sudo -S rm -rf "/usr/share/applications/cromite.desktop"
 echo $password | sudo -S touch "/usr/share/applications/cromite.desktop"
 echo $password | sudo -S tee -a "/usr/share/applications/cromite.desktop" >/dev/null <<EOF
 #!/bin/sh
@@ -62,6 +63,7 @@ EOF
 
 create_file_apparmor()
 {
+echo $password | sudo -S rm -rf "/etc/apparmor.d/usr.bin.cromite.chrome"
 echo $password | sudo -S touch "/etc/apparmor.d/usr.bin.cromite.chrome"
 echo $password | sudo -S tee -a "/etc/apparmor.d/usr.bin.cromite.chrome" >/dev/null <<EOF
 abi <abi/4.0>,
@@ -89,6 +91,7 @@ EOF
 
 create_file_start_cromite()
 {
+echo $password | sudo -S rm -rf "/usr/bin/cromite/start_cromite.sh"
 echo $password | sudo -S touch "/usr/bin/cromite/start_cromite.sh"
 echo $password | sudo -S tee -a "/usr/bin/cromite/start_cromite.sh" >/dev/null <<EOF
 #!/bin/bash
@@ -228,25 +231,20 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 		#copy icon from downloaded release to the icon cache
 		echo $password | sudo -S cp /usr/bin/cromite/product_logo_48.png /usr/share/icons/hicolor/48x48/apps/cromite.png
 		
-		#remove existing cromite desktop file
-		echo $password | sudo -S rm -rf "/usr/share/applications/cromite.desktop"
-            
-            	#create cromite desktop file
+            	#create cromite desktop file and set permissions
 		create_file_cromite_desktop
-            
-		#set desktop file permissions
 		echo $password | sudo -S chmod 644 /usr/share/applications/cromite.desktop
 		
 		#configure gnome to see cromite as an alternative browser and then update the database
 		echo $password | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/cromite/chrome 100
 		echo $password | sudo -S update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/cromite/chrome 100
-		echo $password | sudo -S xdg-settings set default-web-browser cromite.desktop
-		echo $password | sudo -S update-desktop-database
+		xdg-settings set default-web-browser cromite.desktop
+		update-desktop-database
             
         	if [ "$(lsb_release -s -r)" = "24.04" ]; then
         	
-			create_file_apparmor
-			
+			#create apparmor definition
+   			create_file_apparmor
 			echo $password | sudo -S apparmor_parser -r /etc/apparmor.d/usr.bin.cromite.chrome
             
 		#end of Ubuntu 24.04 check for apparmor
