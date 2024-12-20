@@ -232,7 +232,7 @@ if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --t
 		echo $password | sudo -S update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/cromite/chrome 100
 		echo $password | sudo -S update-alternatives --install /usr/bin/gnome-www-browser gnome-www-browser /usr/bin/cromite/chrome 100
 		xdg-settings set default-web-browser cromite.desktop
-		update-desktop-database
+		echo $password | sudo -S update-desktop-database
             
         	if [ "$(lsb_release -s -r)" = "24.04" ]; then
         	
@@ -273,7 +273,7 @@ fi
 
 uninstall_cromite()
 {
-if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "This will Uninstall Cromite and set Firefox as the default web browser!\nClick Yes to proceed OR \nclick No to cancel."; then
+if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "This will Uninstall Cromite and set Firefox as the default web browser!\n\nClick Yes to proceed or click No to cancel."; then
         					
   		#get root password for install
   		password=$(zenity --forms --title "Cromite Uninstall Tool" --width 500 --height 100 --text "Enter root password to uninstall Cromite." --add-password "Password:")
@@ -294,7 +294,7 @@ if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 -
 		echo $password | sudo -S update-alternatives --remove x-www-browser /usr/bin/cromite/chrome
 		echo $password | sudo -S update-alternatives --remove gnome-www-browser /usr/bin/cromite/chrome
 		xdg-settings set default-web-browser firefox_firefox.desktop
-		update-desktop-database
+		echo $password | sudo -S update-desktop-database
             
         	if [ "$(lsb_release -s -r)" = "24.04" ]; then
         	
@@ -307,7 +307,7 @@ if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 -
 
 		if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "Cromite has been Uninstalled.\n\nIf you would like to remove your app profile, click Yes,\nor click No to keep your Cromite settings for future installs."; then
 
-			if zenity --question --windows-icon "warning" --title "Cromite Uninstall Tool" --width 500 --height 100 --text "IF YOU HAVE OTHER VERSIONS OF THE CHROME OR CHROMIUM BRWOSER INSTALLED\nTHIS COULD REMOVE THOSE PROFILES AS WELL\n\nClick Yes to continue or No to keep your settings for future installs."; then
+			if zenity --question --icon-name "dialog-warning" --title "Cromite Uninstall Tool" --width 500 --height 100 --text "IF YOU HAVE OTHER VERSIONS OF THE CHROME OR CHROMIUM BRWOSER INSTALLED\nTHIS COULD REMOVE THOSE PROFILES AS WELL\n\nClick Yes to continue or No to keep your settings for future installs."; then
 
 				rm -rf ~/home/.config/chromium
 				rm -rf ~/home/.gnome/apps/chrome-*
