@@ -21,4 +21,13 @@ Setup Steps:
   9. You will be asked to confirm you want to Install (or uninstall) Cromite
   10.Next you will be asked for a root password (the same as a Windows admin password). This is used to make the appropriate changes to Ubuntu and is not stored anywhere.
 
+User Profile with Enhanced Privacy
+  Cromite is secure and private out of the box. You have the option to install a user profile that includes the following changes:
+  1. User history dicarded when Cromite is closed
+  2. DNS over HTTPS configured to use Cloudflare DNS' Family security servers to filter malicious sites
+  3. Startpage.com set as default search engine. Startpage is based in the Netherlands. They proxy Google searches on your behalf and implment safe search. The add-on is not installed, Cromite is configured to use startpage.
+  4. EFF.org Privacy Badger extension is pre-installed to block even more trackers. Go to https://privacybadger.org to learn more.
+  5. Site search is configured to only search Bookmarks, History and open tabs. Google Gemini has been disabled.
+  6. Adblock Plus easylist and easyprivacy subscriptions have been added.
+
 More detailed setup instructions are available on the wiki:     https://github.com/cloudcoroner/cromite_ubuntu/wiki
