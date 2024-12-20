@@ -190,16 +190,9 @@ EOF
 
 
 
-
-if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
-	# This computer is running Ubuntu
-	
-        #zentity comes with the default Ubuntu install, but if not, install it
-        if [ ! -f "/usr/bin/zenity" ]; then
-		sudo apt install zenity
-        fi
-	
-        if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "This will install Cromite and set it as the default web browser!\nClick Yes to proceed with the installation  OR \nclick No to cancel."; then
+install_cromite()
+{
+if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "This will install Cromite and set it as the default web browser!\nClick Yes to proceed with the installation  OR \nclick No to cancel."; then
         					
   		#get root password for install
   		password=$(zenity --forms --title "Cromite Install Tool" --width 500 --height 100 --text "Enter root password to install Cromite." --add-password "Password:")
@@ -250,9 +243,119 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 		#end of Ubuntu 24.04 check for apparmor
 		fi
 
-        #end of Install verification check
+		if [ "$(lsb_release -s -r)" = "24.04" ]; then
+        	
+			zenity --info --title "Cromite Install Tool 24.04" --width 500 --height 100 --text "Cromite has been Installed and set as the default Web Browser.\n\nYou will be notified of updates when you start Cromite.\n\nIf you would like to set Firefox back to default,\ngo to Settings -> Apps -> Default Apps"
+           
+		#end of Ubuntu 24.04 check for install next steps
+		fi
+
+		if [ "$(lsb_release -s -r)" = "22.04" ]; then
+        	
+			zenity --info --title "Cromite Install Tool 22.04" --width 500 --height 100 --text "Cromite has been Installed and set as the default Web Browser.\n\nYou will be notified of updates when you start Cromite.\n\nIf you would like to set Firefox back to default,\ngo to Settings, Default Applications "
+           
+		#end of Ubuntu 24.04 check for install next steps
+		fi
+  
+#end of Install verification check
+fi
+
+#end of install_cromite
+}
+
+
+
+
+
+
+
+
+
+uninstall_cromite()
+{
+if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "This will Uninstall Cromite and set Firefox as the default web browser!\nClick Yes to proceed OR \nclick No to cancel."; then
+        					
+  		#get root password for install
+  		password=$(zenity --forms --title "Cromite Uninstall Tool" --width 500 --height 100 --text "Enter root password to uninstall Cromite." --add-password "Password:")
+        			
+		#remove install directory
+		echo $password | sudo -S rm -rf /usr/bin/cromite
+		
+		#remove downloaded cromite package
+		echo $password | sudo -S rm -rf chrome-lin64.tar.gz
+		
+		#copy icon copied to the icon cache
+		echo $password | sudo -S rm -rf /usr/share/icons/hicolor/48x48/apps/cromite.png
+		
+            	#remove cromite desktop file
+		echo $password | sudo -S rm -rf /usr/share/applications/cromite.desktop
+		
+		#remove cromite as an alternative browser from gnome and then update the database
+		echo $password | sudo -S update-alternatives --remove x-www-browser /usr/bin/cromite/chrome
+		echo $password | sudo -S update-alternatives --remove gnome-www-browser /usr/bin/cromite/chrome
+		xdg-settings set default-web-browser firefox_firefox.desktop
+		update-desktop-database
+            
+        	if [ "$(lsb_release -s -r)" = "24.04" ]; then
+        	
+			#remove apparmor definition
+   			echo $password | sudo -S apparmor_parser -R /etc/apparmor.d/usr.bin.cromite.chrome
+      			echo $password | sudo -S rm -rf "/etc/apparmor.d/usr.bin.cromite.chrome"
+            
+		#end of Ubuntu 24.04 check for apparmor
+		fi
+
+		if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 --text "Cromite has been Uninstalled.\n\nIf you would like to remove your app profile, click OK,\nor click Cancel to keep your Cromite settings for future installs."; then
+
+			if zenity --warning --title "Cromite Uninstall Tool" --width 500 --height 100 --text "IF YOU HAVE OTHER VERSIONS OF THE CHROME OR CHROMIUM BRWOSER INSTALLED\nTHIS COULD REMOVE THOSE PROFILES AS WELL\n\n, click OK to continue or Cancel to keep your settings for future installs."; then
+
+				rm -rf ~/home/.config/chromium
+				rm -rf ~/home/.gnome/apps/chrome-*
+				rm -rf ~/home/.local/share/desktop-directories/chrome-apps.directory
+				rm -rf ~/home/.local/share/applications/chrome-*
+				rm -rf ~/home/.config/menus/applications-merged/user-chrome-apps.menu
+
+			#end of profile removal final check
+ 			fi
+
+		#end of profile removal check
+		fi
+#end of Uninstall verification check
+fi
+
+#end of uninstall_cromite
+}
+
+
+
+
+
+
+
+
+
+
+if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
+	# This computer is running Ubuntu
+	
+        #zentity comes with the default Ubuntu install, but if not, install it
+        if [ ! -f "/usr/bin/zenity" ]; then
+		sudo apt install zenity
         fi
 
+	setupchoice=$(zenity --forms --info --title=”Cromite Setup Tool” --text “This tool helps automate the install and uninstall of Cromite from Ubuntu.” --ok-label=”Install” --extra-button=”Uninstall” --extra-button=”Cancel”)
+
+  	if [ $setupchoice = "Install" ]; then
+		install_cromite
+  	fi
+   
+	if [ $setupchoice = "Uninstall" ]; then
+		uninstall_cromite
+  	fi
+
+     	if [ $setupchoice = "Cancel" ]; then
+		exit
+  	fi
 #end of Ubuntu check
 fi
 
