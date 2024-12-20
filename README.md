@@ -5,6 +5,7 @@ A set of scripts to install and keep Cromite up to date on Ubuntu Linux Desktop
 Uazo has done amazing work with Cromite - A privacy focused chromium browser that was forked from Bromite. I wanted to create a script that makes it easy for the average user to add this to their Ubuntu desktop installations. Check out his amazing work, here: https://github.com/uazo/cromite
 
 Installation Video:
+
   If you have 2 minutes, go to the wiki to watch a short install video that walks through uninstalling Cromite on Ubuntu Desktop 24.04.
   Link is here -> https://github.com/cloudcoroner/cromite_ubuntu/wiki/Video-Installing-Cromite-on-Ubuntu-24.04
 
