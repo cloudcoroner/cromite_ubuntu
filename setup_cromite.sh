@@ -309,11 +309,11 @@ if zenity --question --title "Cromite Uninstall Tool" --width 500 --height 100 -
 
 			if zenity --question --icon-name "dialog-warning" --title "Cromite Uninstall Tool" --width 500 --height 100 --text "IF YOU HAVE OTHER CHROME OR CHROMIUM BROWSERS INSTALLED\nTHIS COULD REMOVE THOSE PROFILES AS WELL\n\nClick Yes to continue or No to keep your settings for future installs."; then
 
-				rm -rf ~/home/.config/chromium
-				rm -rf ~/home/.gnome/apps/chrome-*
-				rm -rf ~/home/.local/share/desktop-directories/chrome-apps.directory
-				rm -rf ~/home/.local/share/applications/chrome-*
-				rm -rf ~/home/.config/menus/applications-merged/user-chrome-apps.menu
+				rm -rf ~/.config/chromium
+				rm -rf ~/.gnome/apps/chrome-*
+				rm -rf ~/.local/share/desktop-directories/chrome-apps.directory
+				rm -rf ~/.local/share/applications/chrome-*
+				rm -rf ~/.config/menus/applications-merged/user-chrome-apps.menu
 
 			#end of profile removal final check
  			fi
@@ -335,6 +335,28 @@ fi
 
 
 
+install_cromite_profile()
+{
+if zenity --question --title "Cromite Install Tool" --width 500 --height 100 --text "Would you like to configure Cromite with\nPRivate Search, additional Adblock and other settings?\n(Open the readme for more information)\nClick Yes to continue or No to keep default settings."; then
+
+	#unzip profile zip from release package into users profile
+	unzip cromite-home-config-chromium.zip -d ~/.config/
+
+#end of profile removal final check
+fi
+
+#end of install_cromite_profile
+}
+
+
+
+
+
+
+
+
+
+
 if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
 	
@@ -342,10 +364,11 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
         if [ ! -f "/usr/bin/zenity" ]; then
 		sudo apt install zenity
         fi
-	setupchoice=$(zenity --forms --title "Cromite Uninstall Tool" --width 500 --height 100 --text "This tool helps automate the install and uninstall of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
+	setupchoice=$(zenity --forms --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool helps automate the install and uninstall of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
 
   	if [ "$setupchoice" = "Install" ]; then
 		install_cromite
+  		install_cromite_profile
   	fi
    
 	if [ "$setupchoice" = "Uninstall" ]; then
