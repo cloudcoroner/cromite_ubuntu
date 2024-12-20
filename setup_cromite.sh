@@ -342,18 +342,17 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
         if [ ! -f "/usr/bin/zenity" ]; then
 		sudo apt install zenity
         fi
+	setupchoice=$(zenity --forms --title "Cromite Uninstall Tool" --width 500 --height 100 --text "This tool helps automate the install and uninstall of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
 
-	setupchoice=$(zenity --forms --info --title=”Cromite Setup Tool” --text “This tool helps automate the install and uninstall of Cromite from Ubuntu.” --ok-label=”Install” --extra-button=”Uninstall” --extra-button=”Cancel”)
-
-  	if [ $setupchoice = "Install" ]; then
+  	if [ "$setupchoice" = "Install" ]; then
 		install_cromite
   	fi
    
-	if [ $setupchoice = "Uninstall" ]; then
+	if [ "$setupchoice" = "Uninstall" ]; then
 		uninstall_cromite
   	fi
 
-     	if [ $setupchoice = "Cancel" ]; then
+     	if [ "$setupchoice" = "Cancel" ]; then
 		exit
   	fi
 #end of Ubuntu check
