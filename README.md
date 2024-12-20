@@ -14,7 +14,10 @@ FAQs
 
 5. Why does it ask for a root password? For new Linux users, going into a command prompt can be scary. I know this is a bash script, but I figured putting a GUI on it and asking for a password once is more user friendly. You can lok through the script, the password is only kept during script execution.
 
-6. How do I install it?
+6. How do I run it?
      1. Download setup_cromite.sh in Ubuntu
-     2. Go to your Downloads folder and right-click on the file setup_cromite.sh
-     3. In the properties window, click on the permissions tab in the properties window and check the box "Allow executing file as a program"
+     2. Go to your Downloads folder. right-click on the file setup_cromite.sh and click Properties (at the bottom of the list)
+     3. In Ubuntu 24.04
+          1. In the properties window, turn on the toggle at the bottom named "Exectuable as a program" and then close the window by clicking the X in the top right corner
+          2. Right click on the file setup_cromite.sh again and click "Run as a Program"
+     5. In Ubuntu 22.04 - In the properties window, click on the permissions tab in the properties window and check the box "Allow executing file as a program"
