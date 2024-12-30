@@ -1,9 +1,10 @@
 # cromite_ubuntu
 TL;DR
+
 A tool to install Cromite with an auto update mechanism on Ubuntu Linux Desktop. The tool also includes (an optional) profile pre-configured with additional privacy and security settings for new users.
 
 
-Uazo has done amazing work with Cromite - A privacy focused chromium browser that was forked from Bromite. Check out his amazing work, here: https://github.com/uazo/cromite
+Cromite is privacy focused chromium browser that was forked from Bromite. Check out the work being done here: https://github.com/uazo/cromite
 I wanted to create a way for the average user to use Cromite to on their Ubuntu desktop. 
 
 Installation Video:
