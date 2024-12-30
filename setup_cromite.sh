@@ -362,25 +362,36 @@ fi
 
 if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	# This computer is running Ubuntu
+
+	#check CPU architecture
+ 	if [ "$(uname -p)" = "x86_64" ]; then
 	
-        #zentity comes with the default Ubuntu install, but if not, install it
-        if [ ! -f "/usr/bin/zenity" ]; then
-		sudo apt install zenity
-        fi
-	setupchoice=$(zenity --forms --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool helps automate the setup of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
+	        #zentity comes with the default Ubuntu install, but if not, install it
+	        if [ ! -f "/usr/bin/zenity" ]; then
+			sudo apt install zenity
+	        fi
+		setupchoice=$(zenity --forms --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool helps automate the setup of Cromite from Ubuntu." --add-combo "Setup Choice:" --combo-values "Install|Uninstall")
+	
+	  	if [ "$setupchoice" = "Install" ]; then
+			install_cromite
+	  		install_cromite_profile
+	  	fi
+	   
+		if [ "$setupchoice" = "Uninstall" ]; then
+			uninstall_cromite
+	  	fi
+	
+	     	if [ "$setupchoice" = "Cancel" ]; then
+			exit
+	  	fi
 
-  	if [ "$setupchoice" = "Install" ]; then
-		install_cromite
-  		install_cromite_profile
-  	fi
-   
-	if [ "$setupchoice" = "Uninstall" ]; then
-		uninstall_cromite
-  	fi
+	else
 
-     	if [ "$setupchoice" = "Cancel" ]; then
-		exit
-  	fi
+		zenity --error --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool only works with 64 bit Intel Ubuntu computers and VMs.\n\nVMs running on Macs with Apple M series chips are not supported."
+ 
+	#end of CPU check
+	fi
+ 
 #end of Ubuntu check
 fi
 
