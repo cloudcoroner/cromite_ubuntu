@@ -386,12 +386,12 @@ if [ "$(lsb_release -s -i)" = "Ubuntu" ]; then
 	  	fi
 
 	else
-
 		zenity --error --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool only works with 64 bit Intel Ubuntu computers and VMs.\n\nVMs running on Macs with Apple M series chips are not supported."
- 
 	#end of CPU check
 	fi
- 
+
+else
+	zenity --error --title "Cromite Setup Tool" --width 500 --height 100 --text "This tool only works with Ubuntu Linux desktop computers and VMs."
 #end of Ubuntu check
 fi
 
