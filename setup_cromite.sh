@@ -137,7 +137,7 @@ if [ -f "/usr/bin/cromite/chrome" ]; then
 
 					#extract to install directory
 					echo \$password | sudo -S tar xf chrome-lin64.tar.gz -C /usr/bin/cromite --strip-components=1
-					echo \$password | sudo -S echo \$cromitelatest | tee /usr/bin/cromite/cromite.ver
+					echo \$password | echo \$cromitelatest | sudo -S tee /usr/bin/cromite/cromite.ver
 
 					#clean up
 					echo \$password | sudo -S rm -rf chrome-lin64.tar.gz
